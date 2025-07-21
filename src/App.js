@@ -155,7 +155,7 @@ function App() {
           }}>作成したゲーム</h2>
           {showGame === 0 && (
             <div style={{ display: "flex", gap: "1.2rem", flexWrap: "wrap", justifyContent: "center" }}>
-              {[...Array(6)].map((_, i) => (
+              {["MergePuzzle", "TetrisPuzzle", "PuyoPuzzle", "MatchPuzzle", "SlidePuzzle", "PicturePuzzle"].map((gameName, i) => (
                 <button
                   key={i}
                   onClick={() => setShowGame(i + 1)}
@@ -172,7 +172,7 @@ function App() {
                     minWidth: 160
                   }}
                 >
-                  Unityゲーム{String(i + 1)}を表示
+                  {gameName}
                 </button>
               ))}
             </div>
