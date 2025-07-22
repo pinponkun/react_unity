@@ -2,6 +2,7 @@
   "name": "react_unity",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://pinponkun.github.io/react_unity/",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -11,8 +12,7 @@
     "react-dom": "^19.1.0",
     "react-scripts": "5.0.1",
     "react-unity-webgl": "^10.1.1",
-    "web-vitals": "^2.1.4",
-    "homepage": "https://pinponkun.github.io/react_unity/"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
