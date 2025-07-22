@@ -11,7 +11,8 @@
     "react-dom": "^19.1.0",
     "react-scripts": "5.0.1",
     "react-unity-webgl": "^10.1.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "homepage": "https://pinponkun.github.io/react_unity/"
   },
   "scripts": {
     "start": "react-scripts start",
