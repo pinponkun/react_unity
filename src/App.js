@@ -6,50 +6,87 @@ function App() {
   const [activeTab, setActiveTab] = useState("profile");
   const [showGame, setShowGame] = useState(0);
 
-  // 7つ分のUnityビルド
+  const gameConfigs = [
+    {
+      name: "MergePuzzle",
+      color: "#4caf50",
+      paths: {
+        loaderUrl: `${process.env.PUBLIC_URL}/Build_1/MergePuzzle.loader.js`,
+        dataUrl: `${process.env.PUBLIC_URL}/Build_1/MergePuzzle.data`,
+        frameworkUrl: `${process.env.PUBLIC_URL}/Build_1/MergePuzzle.framework.js`,
+        codeUrl: `${process.env.PUBLIC_URL}/Build_1/MergePuzzle.wasm`,
+      },
+    },
+    {
+      name: "TetrisPuzzle",
+      color: "#2196f3",
+      paths: {
+        loaderUrl: `${process.env.PUBLIC_URL}/Build_2/TetrisPuzzle.loader.js`,
+        dataUrl: `${process.env.PUBLIC_URL}/Build_2/TetrisPuzzle.data`,
+        frameworkUrl: `${process.env.PUBLIC_URL}/Build_2/TetrisPuzzle.framework.js`,
+        codeUrl: `${process.env.PUBLIC_URL}/Build_2/TetrisPuzzle.wasm`,
+      },
+    },
+    {
+      name: "PuyoPuzzle",
+      color: "#ff9800",
+      paths: {
+        loaderUrl: `${process.env.PUBLIC_URL}/Build_3/PuyoPuzzle.loader.js`,
+        dataUrl: `${process.env.PUBLIC_URL}/Build_3/PuyoPuzzle.data`,
+        frameworkUrl: `${process.env.PUBLIC_URL}/Build_3/PuyoPuzzle.framework.js`,
+        codeUrl: `${process.env.PUBLIC_URL}/Build_3/PuyoPuzzle.wasm`,
+      },
+    },
+    {
+      name: "MatchPuzzle",
+      color: "#9c27b0",
+      paths: {
+        loaderUrl: `${process.env.PUBLIC_URL}/Build_4/MatchPuzzle.loader.js`,
+        dataUrl: `${process.env.PUBLIC_URL}/Build_4/MatchPuzzle.data`,
+        frameworkUrl: `${process.env.PUBLIC_URL}/Build_4/MatchPuzzle.framework.js`,
+        codeUrl: `${process.env.PUBLIC_URL}/Build_4/MatchPuzzle.wasm`,
+      },
+    },
+    {
+      name: "SlidePuzzle",
+      color: "#009688",
+      paths: {
+        loaderUrl: `${process.env.PUBLIC_URL}/Build_5/SlidePuzzle.loader.js`,
+        dataUrl: `${process.env.PUBLIC_URL}/Build_5/SlidePuzzle.data`,
+        frameworkUrl: `${process.env.PUBLIC_URL}/Build_5/SlidePuzzle.framework.js`,
+        codeUrl: `${process.env.PUBLIC_URL}/Build_5/SlidePuzzle.wasm`,
+      },
+    },
+    {
+      name: "PicturePuzzle",
+      color: "#e91e63",
+      paths: {
+        loaderUrl: `${process.env.PUBLIC_URL}/Build_6/PicturePuzzle.loader.js`,
+        dataUrl: `${process.env.PUBLIC_URL}/Build_6/PicturePuzzle.data`,
+        frameworkUrl: `${process.env.PUBLIC_URL}/Build_6/PicturePuzzle.framework.js`,
+        codeUrl: `${process.env.PUBLIC_URL}/Build_6/PicturePuzzle.wasm`,
+      },
+    },
+    {
+      name: "SameGamePuzzle",
+      color: "#795548",
+      paths: {
+        loaderUrl: `${process.env.PUBLIC_URL}/Build_7/SameGamePuzzle.loader.js`,
+        dataUrl: `${process.env.PUBLIC_URL}/Build_7/SameGamePuzzle.data`,
+        frameworkUrl: `${process.env.PUBLIC_URL}/Build_7/SameGamePuzzle.framework.js`,
+        codeUrl: `${process.env.PUBLIC_URL}/Build_7/SameGamePuzzle.wasm`,
+      },
+    },
+  ];
+
   const unityContexts = [
-    useUnityContext({
-      loaderUrl: `${process.env.PUBLIC_URL}/Build_1/MergePuzzle.loader.js`,
-      dataUrl: `${process.env.PUBLIC_URL}/Build_1/MergePuzzle.data`,
-      frameworkUrl: `${process.env.PUBLIC_URL}/Build_1/MergePuzzle.framework.js`,
-      codeUrl: `${process.env.PUBLIC_URL}/Build_1/MergePuzzle.wasm`,
-    }),
-    useUnityContext({
-      loaderUrl: `${process.env.PUBLIC_URL}/Build_2/TetrisPuzzle.loader.js`,
-      dataUrl: `${process.env.PUBLIC_URL}/Build_2/TetrisPuzzle.data`,
-      frameworkUrl: `${process.env.PUBLIC_URL}/Build_2/TetrisPuzzle.framework.js`,
-      codeUrl: `${process.env.PUBLIC_URL}/Build_2/TetrisPuzzle.wasm`,
-    }),
-    useUnityContext({
-      loaderUrl: `${process.env.PUBLIC_URL}/Build_3/PuyoPuzzle.loader.js`,
-      dataUrl: `${process.env.PUBLIC_URL}/Build_3/PuyoPuzzle.data`,
-      frameworkUrl: `${process.env.PUBLIC_URL}/Build_3/PuyoPuzzle.framework.js`,
-      codeUrl: `${process.env.PUBLIC_URL}/Build_3/PuyoPuzzle.wasm`,
-    }),
-    useUnityContext({
-      loaderUrl: `${process.env.PUBLIC_URL}/Build_4/MatchPuzzle.loader.js`,
-      dataUrl: `${process.env.PUBLIC_URL}/Build_4/MatchPuzzle.data`,
-      frameworkUrl: `${process.env.PUBLIC_URL}/Build_4/MatchPuzzle.framework.js`,
-      codeUrl: `${process.env.PUBLIC_URL}/Build_4/MatchPuzzle.wasm`,
-    }),
-    useUnityContext({
-      loaderUrl: `${process.env.PUBLIC_URL}/Build_5/SlidePuzzle.loader.js`,
-      dataUrl: `${process.env.PUBLIC_URL}/Build_5/SlidePuzzle.data`,
-      frameworkUrl: `${process.env.PUBLIC_URL}/Build_5/SlidePuzzle.framework.js`,
-      codeUrl: `${process.env.PUBLIC_URL}/Build_5/SlidePuzzle.wasm`,
-    }),
-    useUnityContext({
-      loaderUrl: `${process.env.PUBLIC_URL}/Build_6/PicturePuzzle.loader.js`,
-      dataUrl: `${process.env.PUBLIC_URL}/Build_6/PicturePuzzle.data`,
-      frameworkUrl: `${process.env.PUBLIC_URL}/Build_6/PicturePuzzle.framework.js`,
-      codeUrl: `${process.env.PUBLIC_URL}/Build_6/PicturePuzzle.wasm`,
-    }),
-    useUnityContext({
-      loaderUrl: `${process.env.PUBLIC_URL}/Build_7/SameGamePuzzle.loader.js`,
-      dataUrl: `${process.env.PUBLIC_URL}/Build_7/SameGamePuzzle.data.br`,
-      frameworkUrl: `${process.env.PUBLIC_URL}/Build_7/SameGamePuzzle.framework.js.br`,
-      codeUrl: `${process.env.PUBLIC_URL}/Build_7/SameGamePuzzle.wasm.br`,
-    }),
+    useUnityContext(gameConfigs[0].paths),
+    useUnityContext(gameConfigs[1].paths),
+    useUnityContext(gameConfigs[2].paths),
+    useUnityContext(gameConfigs[3].paths),
+    useUnityContext(gameConfigs[4].paths),
+    useUnityContext(gameConfigs[5].paths),
+    useUnityContext(gameConfigs[6].paths),
   ];
 
   return (
@@ -107,22 +144,6 @@ function App() {
             }}
           >
             ゲーム
-          </button>
-          <button
-            onClick={() => setActiveTab("web")}
-            style={{
-              padding: "0.8em 2.5em",
-              fontSize: "1.1em",
-              borderRadius: "8px",
-              border: "none",
-              background: activeTab === "web" ? "#4caf50" : "transparent",
-              color: activeTab === "web" ? "#fff" : "#ccc",
-              cursor: "pointer",
-              fontWeight: activeTab === "web" ? "bold" : "normal",
-              transition: "all 0.3s ease"
-            }}
-          >
-            Web
           </button>
         </nav>
         {/* タブコンテンツ */}
@@ -228,16 +249,16 @@ function App() {
             }}>作成したゲーム</h2>
             {showGame === 0 && (
               <div style={{ display: "flex", gap: "1.2rem", flexWrap: "wrap", justifyContent: "center" }}>
-                {["MergePuzzle", "TetrisPuzzle", "PuyoPuzzle", "MatchPuzzle", "SlidePuzzle", "PicturePuzzle", "SameGamePuzzle"].map((gameName, i) => (
+                {gameConfigs.map(({ name, color }, i) => (
                   <button
-                    key={i}
+                    key={name}
                     onClick={() => setShowGame(i + 1)}
                     style={{
                       padding: "0.8em 2em",
                       fontSize: "1.1em",
                       borderRadius: "8px",
                       border: "none",
-                      background: ["#4caf50", "#2196f3", "#ff9800", "#9c27b0", "#009688", "#e91e63", "#795548"][i],
+                      background: color,
                       color: "#fff",
                       cursor: "pointer",
                       marginBottom: "1.5rem",
@@ -245,13 +266,16 @@ function App() {
                       minWidth: 160
                     }}
                   >
-                    {gameName}
+                    {name}
                   </button>
                 ))}
               </div>
             )}
             {showGame > 0 && (
               <div style={{ marginTop: "1.5rem", textAlign: "center" }}>
+                <div style={{ marginBottom: "0.6rem", fontSize: "1.1em", fontWeight: "bold" }}>
+                  {gameConfigs[showGame - 1].name}
+                </div>
                 <button
                   onClick={() => setShowGame(0)}
                   style={{
@@ -280,47 +304,6 @@ function App() {
                 </div>
               </div>
             )}
-          </section>
-        )}
-
-        {activeTab === "web" && (
-          <section style={{
-            background: "#23272f",
-            color: "#fff",
-            borderRadius: "16px",
-            padding: "2.2rem 2rem",
-            boxShadow: "0 6px 32px rgba(0,0,0,0.10)",
-            minWidth: 350,
-            textAlign: "center",
-            border: "1.5px solid #333",
-            maxWidth: 900,
-            marginLeft: "auto",
-            marginRight: "auto"
-          }}>
-            <h2 style={{
-              borderBottom: "2px solid #4caf50",
-              paddingBottom: "0.7rem",
-              marginBottom: "1.5rem",
-              fontSize: "1.35rem",
-              fontWeight: 700,
-              letterSpacing: "0.04em"
-            }}>作成したWebサイト</h2>
-            <button
-              onClick={() => window.open("https://example.com", "_blank", "noopener,noreferrer")}
-              style={{
-                padding: "0.9em 2.4em",
-                fontSize: "1.1em",
-                borderRadius: "10px",
-                border: "none",
-                background: "#2196f3",
-                color: "#fff",
-                cursor: "pointer",
-                fontWeight: "bold",
-                boxShadow: "0 6px 20px rgba(33,150,243,0.35)"
-              }}
-            >
-              Webサイトを開く
-            </button>
           </section>
         )}
       </header>
