@@ -6,7 +6,7 @@ function App() {
   const [activeTab, setActiveTab] = useState("profile");
   const [showGame, setShowGame] = useState(0);
 
-  // 6つ分のUnityビルド
+  // 7つ分のUnityビルド
   const unityContexts = [
     useUnityContext({
       loaderUrl: `${process.env.PUBLIC_URL}/Build_1/MergePuzzle.loader.js`,
@@ -43,6 +43,12 @@ function App() {
       dataUrl: `${process.env.PUBLIC_URL}/Build_6/PicturePuzzle.data`,
       frameworkUrl: `${process.env.PUBLIC_URL}/Build_6/PicturePuzzle.framework.js`,
       codeUrl: `${process.env.PUBLIC_URL}/Build_6/PicturePuzzle.wasm`,
+    }),
+    useUnityContext({
+      loaderUrl: `${process.env.PUBLIC_URL}/Build_7/SameGamePuzzle.loader.js`,
+      dataUrl: `${process.env.PUBLIC_URL}/Build_7/SameGamePuzzle.data.br`,
+      frameworkUrl: `${process.env.PUBLIC_URL}/Build_7/SameGamePuzzle.framework.js.br`,
+      codeUrl: `${process.env.PUBLIC_URL}/Build_7/SameGamePuzzle.wasm.br`,
     }),
   ];
 
@@ -207,7 +213,7 @@ function App() {
             }}>作成したゲーム</h2>
             {showGame === 0 && (
               <div style={{ display: "flex", gap: "1.2rem", flexWrap: "wrap", justifyContent: "center" }}>
-                {["MergePuzzle", "TetrisPuzzle", "PuyoPuzzle", "MatchPuzzle", "SlidePuzzle", "PicturePuzzle"].map((gameName, i) => (
+                {["MergePuzzle", "TetrisPuzzle", "PuyoPuzzle", "MatchPuzzle", "SlidePuzzle", "PicturePuzzle", "SameGamePuzzle"].map((gameName, i) => (
                   <button
                     key={i}
                     onClick={() => setShowGame(i + 1)}
@@ -216,7 +222,7 @@ function App() {
                       fontSize: "1.1em",
                       borderRadius: "8px",
                       border: "none",
-                      background: ["#4caf50", "#2196f3", "#ff9800", "#9c27b0", "#009688", "#e91e63"][i],
+                      background: ["#4caf50", "#2196f3", "#ff9800", "#9c27b0", "#009688", "#e91e63", "#795548"][i],
                       color: "#fff",
                       cursor: "pointer",
                       marginBottom: "1.5rem",
