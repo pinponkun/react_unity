@@ -108,8 +108,23 @@ function App() {
           >
             ゲーム
           </button>
+          <button
+            onClick={() => setActiveTab("web")}
+            style={{
+              padding: "0.8em 2.5em",
+              fontSize: "1.1em",
+              borderRadius: "8px",
+              border: "none",
+              background: activeTab === "web" ? "#4caf50" : "transparent",
+              color: activeTab === "web" ? "#fff" : "#ccc",
+              cursor: "pointer",
+              fontWeight: activeTab === "web" ? "bold" : "normal",
+              transition: "all 0.3s ease"
+            }}
+          >
+            Web
+          </button>
         </nav>
-
         {/* タブコンテンツ */}
         {activeTab === "profile" && (
           <div style={{
@@ -265,6 +280,47 @@ function App() {
                 </div>
               </div>
             )}
+          </section>
+        )}
+
+        {activeTab === "web" && (
+          <section style={{
+            background: "#23272f",
+            color: "#fff",
+            borderRadius: "16px",
+            padding: "2.2rem 2rem",
+            boxShadow: "0 6px 32px rgba(0,0,0,0.10)",
+            minWidth: 350,
+            textAlign: "center",
+            border: "1.5px solid #333",
+            maxWidth: 900,
+            marginLeft: "auto",
+            marginRight: "auto"
+          }}>
+            <h2 style={{
+              borderBottom: "2px solid #4caf50",
+              paddingBottom: "0.7rem",
+              marginBottom: "1.5rem",
+              fontSize: "1.35rem",
+              fontWeight: 700,
+              letterSpacing: "0.04em"
+            }}>作成したWebサイト</h2>
+            <button
+              onClick={() => window.open("https://example.com", "_blank", "noopener,noreferrer")}
+              style={{
+                padding: "0.9em 2.4em",
+                fontSize: "1.1em",
+                borderRadius: "10px",
+                border: "none",
+                background: "#2196f3",
+                color: "#fff",
+                cursor: "pointer",
+                fontWeight: "bold",
+                boxShadow: "0 6px 20px rgba(33,150,243,0.35)"
+              }}
+            >
+              Webサイトを開く
+            </button>
           </section>
         )}
       </header>
