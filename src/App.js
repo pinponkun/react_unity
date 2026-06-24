@@ -1,311 +1,77 @@
 import './App.css';
 import React, { useState } from "react";
-import { Unity, useUnityContext } from "react-unity-webgl";
+import UnityPlayer from "./UnityPlayer";
 
 function App() {
-  const [activeTab, setActiveTab] = useState("profile");
   const [showGame, setShowGame] = useState(0);
 
   const gameConfigs = [
-    {
-      name: "MergePuzzle",
-      color: "#4caf50",
-      paths: {
-        loaderUrl: `${process.env.PUBLIC_URL}/Build_1/MergePuzzle.loader.js`,
-        dataUrl: `${process.env.PUBLIC_URL}/Build_1/MergePuzzle.data`,
-        frameworkUrl: `${process.env.PUBLIC_URL}/Build_1/MergePuzzle.framework.js`,
-        codeUrl: `${process.env.PUBLIC_URL}/Build_1/MergePuzzle.wasm`,
-      },
-    },
-    {
-      name: "TetrisPuzzle",
-      color: "#2196f3",
-      paths: {
-        loaderUrl: `${process.env.PUBLIC_URL}/Build_2/TetrisPuzzle.loader.js`,
-        dataUrl: `${process.env.PUBLIC_URL}/Build_2/TetrisPuzzle.data`,
-        frameworkUrl: `${process.env.PUBLIC_URL}/Build_2/TetrisPuzzle.framework.js`,
-        codeUrl: `${process.env.PUBLIC_URL}/Build_2/TetrisPuzzle.wasm`,
-      },
-    },
-    {
-      name: "PuyoPuzzle",
-      color: "#ff9800",
-      paths: {
-        loaderUrl: `${process.env.PUBLIC_URL}/Build_3/PuyoPuzzle.loader.js`,
-        dataUrl: `${process.env.PUBLIC_URL}/Build_3/PuyoPuzzle.data`,
-        frameworkUrl: `${process.env.PUBLIC_URL}/Build_3/PuyoPuzzle.framework.js`,
-        codeUrl: `${process.env.PUBLIC_URL}/Build_3/PuyoPuzzle.wasm`,
-      },
-    },
-    {
-      name: "MatchPuzzle",
-      color: "#9c27b0",
-      paths: {
-        loaderUrl: `${process.env.PUBLIC_URL}/Build_4/MatchPuzzle.loader.js`,
-        dataUrl: `${process.env.PUBLIC_URL}/Build_4/MatchPuzzle.data`,
-        frameworkUrl: `${process.env.PUBLIC_URL}/Build_4/MatchPuzzle.framework.js`,
-        codeUrl: `${process.env.PUBLIC_URL}/Build_4/MatchPuzzle.wasm`,
-      },
-    },
-    {
-      name: "SlidePuzzle",
-      color: "#009688",
-      paths: {
-        loaderUrl: `${process.env.PUBLIC_URL}/Build_5/SlidePuzzle.loader.js`,
-        dataUrl: `${process.env.PUBLIC_URL}/Build_5/SlidePuzzle.data`,
-        frameworkUrl: `${process.env.PUBLIC_URL}/Build_5/SlidePuzzle.framework.js`,
-        codeUrl: `${process.env.PUBLIC_URL}/Build_5/SlidePuzzle.wasm`,
-      },
-    },
-    {
-      name: "PicturePuzzle",
-      color: "#e91e63",
-      paths: {
-        loaderUrl: `${process.env.PUBLIC_URL}/Build_6/PicturePuzzle.loader.js`,
-        dataUrl: `${process.env.PUBLIC_URL}/Build_6/PicturePuzzle.data`,
-        frameworkUrl: `${process.env.PUBLIC_URL}/Build_6/PicturePuzzle.framework.js`,
-        codeUrl: `${process.env.PUBLIC_URL}/Build_6/PicturePuzzle.wasm`,
-      },
-    },
-    {
-      name: "SameGamePuzzle",
-      color: "#795548",
-      paths: {
-        loaderUrl: `${process.env.PUBLIC_URL}/Build_7/SameGamePuzzle.loader.js`,
-        dataUrl: `${process.env.PUBLIC_URL}/Build_7/SameGamePuzzle.data`,
-        frameworkUrl: `${process.env.PUBLIC_URL}/Build_7/SameGamePuzzle.framework.js`,
-        codeUrl: `${process.env.PUBLIC_URL}/Build_7/SameGamePuzzle.wasm`,
-      },
-    },
-  ];
-
-  const unityContexts = [
-    useUnityContext(gameConfigs[0].paths),
-    useUnityContext(gameConfigs[1].paths),
-    useUnityContext(gameConfigs[2].paths),
-    useUnityContext(gameConfigs[3].paths),
-    useUnityContext(gameConfigs[4].paths),
-    useUnityContext(gameConfigs[5].paths),
-    useUnityContext(gameConfigs[6].paths),
+    { name: "MergePuzzle", desc: "落として、くっつけて、大きくする！スイカゲーム風落ち物パズル！", color: "#4caf50", paths: { loaderUrl: `${process.env.PUBLIC_URL}/Build_1/MergePuzzle.loader.js`, dataUrl: `${process.env.PUBLIC_URL}/Build_1/MergePuzzle.data`, frameworkUrl: `${process.env.PUBLIC_URL}/Build_1/MergePuzzle.framework.js`, codeUrl: `${process.env.PUBLIC_URL}/Build_1/MergePuzzle.wasm` } },
+    { name: "TetrisPuzzle", desc: "回して、ハメて、ラインを消し去れ！テトリス風ブロックパズル！", color: "#2196f3", paths: { loaderUrl: `${process.env.PUBLIC_URL}/Build_2/TetrisPuzzle.loader.js`, dataUrl: `${process.env.PUBLIC_URL}/Build_2/TetrisPuzzle.data`, frameworkUrl: `${process.env.PUBLIC_URL}/Build_2/TetrisPuzzle.framework.js`, codeUrl: `${process.env.PUBLIC_URL}/Build_2/TetrisPuzzle.wasm` } },
+    { name: "PuyoPuzzle", desc: "繋げて、そこから大連鎖！ぷよぷよ風連鎖パズル！", color: "#ff9800", paths: { loaderUrl: `${process.env.PUBLIC_URL}/Build_3/PuyoPuzzle.loader.js`, dataUrl: `${process.env.PUBLIC_URL}/Build_3/PuyoPuzzle.data`, frameworkUrl: `${process.env.PUBLIC_URL}/Build_3/PuyoPuzzle.framework.js`, codeUrl: `${process.env.PUBLIC_URL}/Build_3/PuyoPuzzle.wasm` } },
+    { name: "MatchPuzzle", desc: "スワイプして、ならべて、爽快！キャンディクラッシュ風マッチパズル！", color: "#9c27b0", paths: { loaderUrl: `${process.env.PUBLIC_URL}/Build_4/MatchPuzzle.loader.js`, dataUrl: `${process.env.PUBLIC_URL}/Build_4/MatchPuzzle.data`, frameworkUrl: `${process.env.PUBLIC_URL}/Build_4/MatchPuzzle.framework.js`, codeUrl: `${process.env.PUBLIC_URL}/Build_4/MatchPuzzle.wasm` } },
+    { name: "SlidePuzzle", desc: "スライドして、ナンバーを並べる！スライドパズル！", color: "#009688", paths: { loaderUrl: `${process.env.PUBLIC_URL}/Build_5/SlidePuzzle.loader.js`, dataUrl: `${process.env.PUBLIC_URL}/Build_5/SlidePuzzle.data`, frameworkUrl: `${process.env.PUBLIC_URL}/Build_5/SlidePuzzle.framework.js`, codeUrl: `${process.env.PUBLIC_URL}/Build_5/SlidePuzzle.wasm` } },
+    { name: "PicturePuzzle", desc: "スライドして、絵を完成！ピクチャーパズル！", color: "#e91e63", paths: { loaderUrl: `${process.env.PUBLIC_URL}/Build_6/PicturePuzzle.loader.js`, dataUrl: `${process.env.PUBLIC_URL}/Build_6/PicturePuzzle.data`, frameworkUrl: `${process.env.PUBLIC_URL}/Build_6/PicturePuzzle.framework.js`, codeUrl: `${process.env.PUBLIC_URL}/Build_6/PicturePuzzle.wasm` } },
+    { name: "SameGamePuzzle", desc: "繋げて、ハイスコアを目指せ！ツムツム風サメガメパズル！", color: "#795548", paths: { loaderUrl: `${process.env.PUBLIC_URL}/Build_7/SameGamePuzzle.loader.js`, dataUrl: `${process.env.PUBLIC_URL}/Build_7/SameGamePuzzle.data`, frameworkUrl: `${process.env.PUBLIC_URL}/Build_7/SameGamePuzzle.framework.js`, codeUrl: `${process.env.PUBLIC_URL}/Build_7/SameGamePuzzle.wasm` } },
   ];
 
   return (
-    <div className="App" style={{ background: "#222", minHeight: "100vh" }}>
-      <header className="App-header" style={{ padding: "2rem 0", background: "#282c34", minHeight: "100vh" }}>
-        <h1 style={{
-          marginBottom: "2rem",
-          letterSpacing: "0.12em",
-          fontWeight: 700,
-          fontSize: "2.4rem",
-          color: "#fff"
-        }}>ポートフォリオ</h1>
-
-        {/* タブナビゲーション */}
-        <nav style={{
-          display: "flex",
-          gap: "0",
-          marginBottom: "2.5rem",
-          background: "#333",
-          borderRadius: "12px",
-          padding: "4px",
-          boxShadow: "0 4px 16px rgba(0,0,0,0.2)"
-        }}>
-          <button
-            onClick={() => setActiveTab("profile")}
-            style={{
-              padding: "0.8em 2.5em",
-              fontSize: "1.1em",
-              borderRadius: "8px",
-              border: "none",
-              background: activeTab === "profile" ? "#4caf50" : "transparent",
-              color: activeTab === "profile" ? "#fff" : "#ccc",
-              cursor: "pointer",
-              fontWeight: activeTab === "profile" ? "bold" : "normal",
-              transition: "all 0.3s ease"
-            }}
-          >
-            プロフィール
-          </button>
-          <button
-            onClick={() => {
-              setActiveTab("games");
-              setShowGame(0);
-            }}
-            style={{
-              padding: "0.8em 2.5em",
-              fontSize: "1.1em",
-              borderRadius: "8px",
-              border: "none",
-              background: activeTab === "games" ? "#4caf50" : "transparent",
-              color: activeTab === "games" ? "#fff" : "#ccc",
-              cursor: "pointer",
-              fontWeight: activeTab === "games" ? "bold" : "normal",
-              transition: "all 0.3s ease"
-            }}
-          >
-            ゲーム
-          </button>
-        </nav>
-        {/* タブコンテンツ */}
-        {activeTab === "profile" && (
-          <div style={{
-            display: "flex",
-            gap: "7rem",
-            alignItems: "flex-start",
-            width: "100%",
-            maxWidth: 1500,
-            margin: "0 auto",
-            justifyContent: "center"
-          }}>
-            {/* プロフィール（左側） */}
-            <section style={{
-              flex: "0 0 650px",
-              background: "#fff",
-              color: "#222",
-              borderRadius: "18px",
-              padding: "2.8rem 2.2rem 2rem 2.2rem",
-              boxShadow: "0 8px 40px rgba(0,0,0,0.13)",
-              textAlign: "left",
-              minWidth: 500,
-              maxWidth: 700,
-              border: "2px solid #e0e0e0",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center"
-            }}>
-              <h2 style={{
-                borderBottom: "2px solid #4caf50",
-                paddingBottom: "0.7rem",
-                marginBottom: "1.2rem",
-                fontSize: "1.45rem",
-                fontWeight: 700,
-                letterSpacing: "0.04em"
-              }}>プロフィール</h2>
-              <div style={{ lineHeight: 2.1, fontSize: "1.12em" }}>
-                <div><strong>名前：</strong>林田 歴</div>
-                <div><strong>年齢：</strong>23歳</div>
-                <div><strong>学歴：</strong>福岡大学大学院工学研究科電子情報工学専攻博士課程前期<br />2025年4月~2027年3月卒業見込み</div>
-                <div><strong>趣味：</strong>ゲーム、アニメ、プログラミング</div>
-                <div><strong>使用経験のある言語：</strong>C, C#, Python, Java, JavaScript, HTML, CSS</div>
-                <div><strong>使用経験のあるツール：</strong>Unity</div>
-                <div><strong>使用経験のあるフレームワーク：</strong>React</div>
+    <div className="App">
+      <header className="App-header gentle-bg">
+        <div className="container narrow">
+          <main className="hero-block" role="main">
+            <div className="hero-left">
+              <img className="profile-photo" src={process.env.PUBLIC_URL + "/dot_pinponkun.png"} alt="プロフィール写真" />
+            </div>
+            <div className="hero-right">
+              <div className="hero-content">
+                <h1 className="name">林田 歴</h1>
+                <p className="tagline">福岡大学大学院 工学研究科 電子情報工学専攻</p>
+                <div className="accounts">
+                  <a className="account-link" href="https://github.com/pinponkun" target="_blank" rel="noreferrer">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.38 7.86 10.9.58.11.79-.25.79-.56 0-.28-.01-1.01-.01-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.36-1.3-1.72-1.3-1.72-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.73 1.27 3.4.97.11-.76.41-1.27.74-1.56-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.07 0 0 .97-.31 3.18 1.18.92-.26 1.9-.39 2.88-.39.98 0 1.96.13 2.88.39 2.21-1.49 3.18-1.18 3.18-1.18.63 1.6.23 2.78.11 3.07.74.81 1.19 1.84 1.19 3.1 0 4.43-2.71 5.41-5.29 5.69.42.36.79 1.08.79 2.18 0 1.57-.01 2.84-.01 3.23 0 .31.21.68.8.56C20.21 21.38 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z" fill="currentColor"/></svg>
+                    <span>GitHub</span>
+                  </a>
+                </div>
               </div>
-            </section>
-            {/* 画像（右側） */}
-            <section style={{
-              flex: "0 0 200px",
-              background: "#fff",
-              color: "#222",
-              borderRadius: "18px",
-              padding: "2.2rem",
-              boxShadow: "0 8px 40px rgba(0,0,0,0.13)",
-              minWidth: 120,
-              maxWidth: 220,
-              border: "2px solid #e0e0e0",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center"
-            }}>
-              <img
-                src={process.env.PUBLIC_URL + "/pinponkun.jpeg"}
-                alt="pinponkun"
-                style={{
-                  width: "100%",
-                  maxWidth: "300px",
-                  borderRadius: "20px",
-                  boxShadow: "0 2px 16px rgba(76,175,80,0.18)",
-                  marginBottom: "1rem",
-                  background: "#fff",
-                  objectFit: "contain"
-                }}
-                onError={e => { e.target.style.display = "none"; }}
-              />
-            </section>
+            </div>
+          </main>
+
+          <section className="works">
+            <h2 className="section-title">作品（Games）</h2>
+            <div className="games-grid">
+              {gameConfigs.map((g, i) => (
+                <article className="game-card" key={g.name} tabIndex={0} onClick={() => setShowGame(i+1)} onKeyDown={(e)=>{ if(e.key==='Enter') setShowGame(i+1)}} aria-label={`Play ${g.name}`} style={{animationDelay: `${i * 80}ms`}}>
+                  <div className="game-thumb">
+                    <img src={process.env.PUBLIC_URL + `/thumbnails/${g.name}.png`} alt={`${g.name} thumbnail`} />
+                  </div>
+                  <div className="game-info">
+                    <div>
+                      <h3 className="game-title">{g.name}</h3>
+                      <p className="game-desc">{g.desc}</p>
+                    </div>
+                    <div className="game-actions">
+                      <button className="btn btn-primary" onClick={(e)=>{ e.stopPropagation(); setShowGame(i+1)}} aria-label={`Open ${g.name}`}>Play</button>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        </div>
+
+        {showGame > 0 && (
+          <div className="unity-modal" onClick={() => setShowGame(0)}>
+            <div className="unity-container" onClick={e => e.stopPropagation()}>
+              <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:8}}>
+                <strong style={{color:'#fff'}}>{gameConfigs[showGame-1].name}</strong>
+                <button className="btn btn-ghost" onClick={() => setShowGame(0)}>閉じる</button>
+              </div>
+              <UnityPlayer paths={gameConfigs[showGame - 1].paths} style={{ width: '100%', height: '640px', background:'#000' }} />
+            </div>
           </div>
         )}
 
-        {activeTab === "games" && (
-          <section style={{
-            background: "#23272f",
-            color: "#fff",
-            borderRadius: "16px",
-            padding: "2.2rem 2rem",
-            boxShadow: "0 6px 32px rgba(0,0,0,0.10)",
-            minWidth: 350,
-            textAlign: "center",
-            border: "1.5px solid #333",
-            maxWidth: 900,
-            marginLeft: "auto",
-            marginRight: "auto"
-          }}>
-            <h2 style={{
-              borderBottom: "2px solid #4caf50",
-              paddingBottom: "0.7rem",
-              marginBottom: "1.5rem",
-              fontSize: "1.35rem",
-              fontWeight: 700,
-              letterSpacing: "0.04em"
-            }}>作成したゲーム</h2>
-            {showGame === 0 && (
-              <div style={{ display: "flex", gap: "1.2rem", flexWrap: "wrap", justifyContent: "center" }}>
-                {gameConfigs.map(({ name, color }, i) => (
-                  <button
-                    key={name}
-                    onClick={() => setShowGame(i + 1)}
-                    style={{
-                      padding: "0.8em 2em",
-                      fontSize: "1.1em",
-                      borderRadius: "8px",
-                      border: "none",
-                      background: color,
-                      color: "#fff",
-                      cursor: "pointer",
-                      marginBottom: "1.5rem",
-                      fontWeight: "bold",
-                      minWidth: 160
-                    }}
-                  >
-                    {name}
-                  </button>
-                ))}
-              </div>
-            )}
-            {showGame > 0 && (
-              <div style={{ marginTop: "1.5rem", textAlign: "center" }}>
-                <div style={{ marginBottom: "0.6rem", fontSize: "1.1em", fontWeight: "bold" }}>
-                  {gameConfigs[showGame - 1].name}
-                </div>
-                <button
-                  onClick={() => setShowGame(0)}
-                  style={{
-                    padding: "0.5em 1em",
-                    fontSize: "1em",
-                    borderRadius: "6px",
-                    border: "none",
-                    background: "#f44336",
-                    color: "#fff",
-                    cursor: "pointer",
-                    marginBottom: "1rem"
-                  }}
-                >
-                  閉じる
-                </button>
-                <div>
-                  <Unity
-                    unityProvider={unityContexts[showGame - 1].unityProvider}
-                    style={{
-                      width: 800,
-                      height: 600,
-                      border: "2px solid #222",
-                      background: "#222",
-                    }}
-                  />
-                </div>
-              </div>
-            )}
-          </section>
-        )}
       </header>
     </div>
   );
